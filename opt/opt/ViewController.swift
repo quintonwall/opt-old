@@ -11,7 +11,6 @@ import UIKit
 class ViewController: UIViewController, SFAuthenticationManagerDelegate {
 
     @IBOutlet weak var connectButton: UIButton!
-    var loggedIn = false
 
     
     override func viewDidLoad() {
@@ -44,20 +43,17 @@ class ViewController: UIViewController, SFAuthenticationManagerDelegate {
     }
     
     
-    func authManagerDidAuthenticate(manager: SFAuthenticationManager!, credentials: SFOAuthCredentials!, authInfo info: SFOAuthInfo!) {
-        
-       loggedIn = true
-    }
     
     func authManagerDidFinish(manager: SFAuthenticationManager!, info: SFOAuthInfo!) {
        
         //need to perform this check at the end of the authmanager lifecycle
         //because SFRootViewManager removes the current view after didAUthenticate gets called :(
-        if loggedIn {
+       
+        if !SFUserAccountManager.sharedInstance().currentUser.userName.isEmpty {
              self.performSegueWithIdentifier("loggedIn", sender: nil)
         }
         
-           }
+    }
    
     
 } //end class
