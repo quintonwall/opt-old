@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import WatchKit
 
 //import OAuthSwift
 
@@ -15,10 +16,16 @@ let RemoteAccessConsumerKey = "3MVG9fMtCkV6eLhdjZ8TO0bd8hGzu5J5yQgUxxSuCecbgoXyi
 let OAuthRedirectURI        = "mobilesdk://success";
 let scopes = ["api"];
 
+//let defaults = NSUserDefaults(suiteName: appGroupID)
+
+
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+   
     
         
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -114,13 +121,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
-    
+        
     // MARK: - Salesforce Auth Stuff
     
     override
     init()
     {
         super.init()
+        
         
         //let appGroupID = "group.com.gyspycode.SFTasks"
         //let defaults = NSUserDefaults(suiteName: appGroupID)

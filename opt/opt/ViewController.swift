@@ -50,9 +50,20 @@ class ViewController: UIViewController, SFAuthenticationManagerDelegate {
         //because SFRootViewManager removes the current view after didAUthenticate gets called :(
        
         if !SFUserAccountManager.sharedInstance().currentUser.userName.isEmpty {
+            
+           
+            /* old watchos way of comms
+            print(appGroupID)
+            
+            
+            if let defaults = NSUserDefaults(suiteName: appGroupID) {
+                defaults.setValue(SFUserAccountManager.sharedInstance().currentUser.userName, forKey: "username")
+                defaults.synchronize()
+            }
+            */
+            
              self.performSegueWithIdentifier("loggedIn", sender: nil)
         }
-        
     }
    
     

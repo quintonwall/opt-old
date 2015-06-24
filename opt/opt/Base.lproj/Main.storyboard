@@ -131,15 +131,21 @@
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="40J-dH-0Tf"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="24" id="5mz-91-kx7"/>
                                     <constraint firstAttribute="width" constant="24" id="Cx1-yp-uuR"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="24" id="PaQ-C2-4Jo"/>
                                     <constraint firstAttribute="width" constant="24" id="WdL-9Y-xVR"/>
-                                    <constraint firstAttribute="height" constant="20" id="mYw-mV-OIc"/>
+                                    <constraint firstAttribute="height" constant="20" id="mYw-mV-OIc">
+                                        <variation key="widthClass=compact" constant="24"/>
+                                    </constraint>
                                 </constraints>
-                                <state key="normal" image="briefcase_L"/>
+                                <state key="normal" image="icon bars"/>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="40J-dH-0Tf"/>
+                                        <exclude reference="5mz-91-kx7"/>
                                         <exclude reference="Cx1-yp-uuR"/>
+                                        <exclude reference="PaQ-C2-4Jo"/>
                                         <exclude reference="WdL-9Y-xVR"/>
                                         <exclude reference="mYw-mV-OIc"/>
                                     </mask>
@@ -154,6 +160,8 @@
                                 <variation key="widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="40J-dH-0Tf"/>
+                                        <include reference="5mz-91-kx7"/>
+                                        <include reference="PaQ-C2-4Jo"/>
                                         <include reference="mYw-mV-OIc"/>
                                     </mask>
                                 </variation>
@@ -169,21 +177,37 @@
                                     <rect key="frame" x="181" y="530" width="39" height="37"/>
                                 </variation>
                             </pageControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Grl-A9-PSy">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.35919470879999998" green="0.67420480429999996" blue="1" alpha="0.90308277029999995" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="leadingMargin" secondItem="7hZ-PX-Ohs" secondAttribute="leading" id="7Ts-wo-Xap"/>
                             <constraint firstItem="7hZ-PX-Ohs" firstAttribute="top" secondItem="WJh-JS-TqA" secondAttribute="bottom" constant="10" id="AIa-6l-dQH"/>
+                            <constraint firstItem="Grl-A9-PSy" firstAttribute="centerY" secondItem="79h-ZE-HSL" secondAttribute="centerY" id="EDl-Xo-IH2">
+                                <variation key="widthClass=compact" constant="-33.5"/>
+                            </constraint>
+                            <constraint firstItem="Grl-A9-PSy" firstAttribute="centerX" secondItem="79h-ZE-HSL" secondAttribute="centerX" id="c6v-dc-DPC">
+                                <variation key="widthClass=compact" constant="2"/>
+                            </constraint>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="7hZ-PX-Ohs"/>
                                 <exclude reference="ZY0-di-gwe"/>
+                                <exclude reference="Grl-A9-PSy"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="7Ts-wo-Xap"/>
                                 <exclude reference="AIa-6l-dQH"/>
+                                <exclude reference="EDl-Xo-IH2"/>
+                                <exclude reference="c6v-dc-DPC"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
@@ -195,15 +219,19 @@
                             <mask key="subviews">
                                 <include reference="7hZ-PX-Ohs"/>
                                 <include reference="ZY0-di-gwe"/>
+                                <include reference="Grl-A9-PSy"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="7Ts-wo-Xap"/>
                                 <include reference="AIa-6l-dQH"/>
+                                <include reference="EDl-Xo-IH2"/>
+                                <include reference="c6v-dc-DPC"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
                         <outlet property="settingsButton" destination="7hZ-PX-Ohs" id="eCp-7D-nnS"/>
+                        <outlet property="tempLabel" destination="Grl-A9-PSy" id="ncF-ar-VF6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jkw-UY-bpy" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -317,7 +345,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="briefcase_L" width="44" height="37"/>
+        <image name="icon bars" width="20" height="20"/>
         <image name="logo" width="296" height="184"/>
     </resources>
     <inferredMetricsTieBreakers>

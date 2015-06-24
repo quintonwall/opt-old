@@ -18,4 +18,6 @@ let Salesforce =
     "consumerSecret": "2395602594367212505"
 ]
 
+let appGroupID = "group.gypsycode.opt"
+
 
