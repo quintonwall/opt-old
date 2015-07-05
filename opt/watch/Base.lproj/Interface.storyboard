@@ -1,37 +1,83 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="8121.17" systemVersion="15A178w" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc" defaultGlanceController="0uZ-2p-rRc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="8121.20" systemVersion="14E11f" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc" defaultGlanceController="0uZ-2p-rRc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8101.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8101.16"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="8066.14"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Avenir.ttc">
+            <string>Avenir-Light</string>
+            <string>Avenir-Book</string>
+            <string>Avenir-Book</string>
+            <string>Avenir-Book</string>
+        </mutableArray>
+        <mutableArray key="AvenirNext.ttc">
+            <string>AvenirNext-UltraLight</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
-        <!--Interface Controller-->
+        <!--Main View-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="watch" customModuleProvider="target">
+                <controller backgroundImage="background-radius40%" contentMode="scaleAspectFill" id="AgC-eL-Hgc" userLabel="Main View" customClass="InterfaceController" customModule="watch" customModuleProvider="target">
                     <items>
-                        <label alignment="center" text="Label" id="NuO-yW-Url"/>
-                        <button width="1" alignment="left" title="Button" id="FXe-gf-oBg">
-                            <connections>
-                                <action selector="refreshTapped" destination="AgC-eL-Hgc" id="n36-4Y-EU7"/>
-                            </connections>
-                        </button>
+                        <label alignment="center" text="Opportunity Name" id="NuO-yW-Url">
+                            <color key="textColor" red="0.27669267720000001" green="0.75121089789999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="font" name="Avenir-Light" family="Avenir" pointSize="14"/>
+                        </label>
+                        <group width="1" height="80" alignment="left" verticalAlignment="center" id="SLH-0O-e54" userLabel="Opty-Amount-Group">
+                            <items>
+                                <label height="50" alignment="center" verticalAlignment="center" text="$200" textAlignment="center" id="uSQ-WC-2HV">
+                                    <fontDescription key="font" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="50"/>
+                                </label>
+                                <label alignment="center" verticalAlignment="center" text="m" textAlignment="right" id="74Q-wz-YEi">
+                                    <color key="textColor" red="0.28205976100000002" green="0.66648859039999997" blue="0.700875947" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" name="Avenir-Book" family="Avenir" pointSize="16"/>
+                                </label>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" verticalAlignment="bottom" id="1K3-CS-xVY" userLabel="Bottom-Controls">
+                            <items>
+                                <group width="70" alignment="right" verticalAlignment="center" layout="vertical" id="Hmk-pw-UlZ" userLabel="Right-Bottom">
+                                    <items>
+                                        <button width="20" height="30" alignment="center" backgroundImage="opt-contract" id="ld7-FZ-LRm"/>
+                                        <label alignment="center" verticalAlignment="bottom" text="Prospecting" id="XN2-gG-jfM">
+                                            <color key="textColor" red="0.27669267720000001" green="0.75121089789999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="font" name="Avenir-Book" family="Avenir" pointSize="16"/>
+                                        </label>
+                                    </items>
+                                </group>
+                                <group width="70" alignment="left" verticalAlignment="center" layout="vertical" id="rfK-Ga-H8U" userLabel="Left-Bottom">
+                                    <items>
+                                        <button width="30" height="30" alignment="center" backgroundImage="calender_L" id="YXQ-hI-w9F"/>
+                                        <label alignment="center" verticalAlignment="bottom" text="7/2/15" id="nGH-OL-3xy">
+                                            <color key="textColor" red="0.27669267720000001" green="0.75121089789999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="font" name="Avenir-Book" family="Avenir" pointSize="16"/>
+                                        </label>
+                                    </items>
+                                </group>
+                            </items>
+                        </group>
                     </items>
                     <connections>
-                        <outlet property="refreshButton" destination="FXe-gf-oBg" id="cvc-9v-vwh"/>
-                        <outlet property="statusLabel" destination="NuO-yW-Url" id="O2h-Yn-FTO"/>
+                        <outlet property="optyAmountIndicatorLabel" destination="74Q-wz-YEi" id="F5E-6w-NVr"/>
+                        <outlet property="optyAmountLabel" destination="uSQ-WC-2HV" id="vFb-83-g89"/>
+                        <outlet property="optyDateLabel" destination="nGH-OL-3xy" id="sN2-v8-E8i"/>
+                        <outlet property="optyNameLabel" destination="NuO-yW-Url" id="Uup-f7-es5"/>
+                        <outlet property="optyStageButton" destination="ld7-FZ-LRm" id="jYc-5B-5p4"/>
+                        <outlet property="optyStageLabel" destination="XN2-gG-jfM" id="wRs-67-ela"/>
                     </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="235" y="347"/>
         </scene>
-        <!--Glance Interface Controller-->
+        <!--glance-->
         <scene sceneID="BOz-TT-tkC">
             <objects>
-                <glanceController spacing="0.0" id="0uZ-2p-rRc" customClass="GlanceController" customModule="watch" customModuleProvider="target">
+                <glanceController identifier="glance" spacing="0.0" id="0uZ-2p-rRc" customClass="GlanceController" customModule="watch" customModuleProvider="target">
                     <items>
-                        <group alignment="left" id="t8f-Gd-c4y"/>
-                        <group alignment="left" id="uCw-4Q-Ouw"/>
+                        <group alignment="left" contentMode="scaleAspectFit" id="t8f-Gd-c4y"/>
+                        <group alignment="left" backgroundImage="logo" contentMode="scaleAspectFit" layout="vertical" id="uCw-4Q-Ouw"/>
                     </items>
                     <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="14"/>
                 </glanceController>

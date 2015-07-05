@@ -15,6 +15,7 @@ import WatchKit
 let RemoteAccessConsumerKey = "3MVG9fMtCkV6eLhdjZ8TO0bd8hGzu5J5yQgUxxSuCecbgoXyi.K29XllYaR_X0S5uGpH_kLhPbR2bMOys1U2D";
 let OAuthRedirectURI        = "mobilesdk://success";
 let scopes = ["api"];
+let optyHelper: OpportunityHelper = OpportunityHelper()
 
 //let defaults = NSUserDefaults(suiteName: appGroupID)
 
@@ -24,6 +25,7 @@ let scopes = ["api"];
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    //var optyHelper: OpportunityHelper!
     
    
     
@@ -167,6 +169,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.handleUserSwitch(fromUser, toUser: toUser)
         }
         
+        //optyHelper = OpportunityHelper()
+        optyHelper.register()
     }
 
     

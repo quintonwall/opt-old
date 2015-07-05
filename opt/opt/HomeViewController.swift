@@ -16,12 +16,15 @@ class HomeViewController: UIViewController, WCSessionDelegate {
     
      var session: WCSession!
     
+    
     @IBOutlet weak var tempLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
         settingsButton.layer.borderColor = UIColor.whiteColor().CGColor
+    
+        
         
         if (WCSession.isSupported()) {
             session = WCSession.defaultSession()
@@ -52,13 +55,16 @@ class HomeViewController: UIViewController, WCSessionDelegate {
     }
     
     
+    
     //receive a message from the watch
     func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
         let val = message["fromwatch"] as? String
         print("received a message")
+        
          dispatch_async(dispatch_get_main_queue()) {
            self.tempLabel.text = val
         }
     }
+
     
 }

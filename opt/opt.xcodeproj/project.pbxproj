@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		24B7074F94B33E4B3C08E6A5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 489B46DC9696C4013A4EC560 /* libPods.a */; };
+		5AE32A541B4876E0004417D6 /* Opportunity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE32A531B4876E0004417D6 /* Opportunity.swift */; };
+		5AF3A1251B4845E6007616D8 /* OpportunityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF3A1241B4845E6007616D8 /* OpportunityHelper.swift */; };
 		E70473F51B34DAB900E61CC9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70473F41B34DAB900E61CC9 /* Constants.swift */; };
 		E7173BDF1B33638800B3860B /* SettingsTableCellDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7173BDE1B33638800B3860B /* SettingsTableCellDetailView.swift */; };
 		E774516F1B39E16400A1D46B /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E774516D1B39E16400A1D46B /* Interface.storyboard */; };
@@ -88,6 +90,8 @@
 
 /* Begin PBXFileReference section */
 		489B46DC9696C4013A4EC560 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		5AE32A531B4876E0004417D6 /* Opportunity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Opportunity.swift; sourceTree = "<group>"; };
+		5AF3A1241B4845E6007616D8 /* OpportunityHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpportunityHelper.swift; sourceTree = "<group>"; };
 		673CDE8071F659294E2E2F21 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		A59094C29FC6A5D6548FACB1 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		E70473F21B34CEB700E61CC9 /* Opt_BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Opt_BridgingHeader.h; sourceTree = "<group>"; };
@@ -250,6 +254,8 @@
 				E7173BDE1B33638800B3860B /* SettingsTableCellDetailView.swift */,
 				E70473F21B34CEB700E61CC9 /* Opt_BridgingHeader.h */,
 				E70473F41B34DAB900E61CC9 /* Constants.swift */,
+				5AF3A1241B4845E6007616D8 /* OpportunityHelper.swift */,
+				5AE32A531B4876E0004417D6 /* Opportunity.swift */,
 			);
 			path = opt;
 			sourceTree = "<group>";
@@ -535,9 +541,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7E7B6491B3322A60052C290 /* opt.xcdatamodeld in Sources */,
+				5AE32A541B4876E0004417D6 /* Opportunity.swift in Sources */,
 				E7E7B6431B3322A60052C290 /* ViewController.swift in Sources */,
 				E7E7B6411B3322A60052C290 /* AppDelegate.swift in Sources */,
 				E7173BDF1B33638800B3860B /* SettingsTableCellDetailView.swift in Sources */,
+				5AF3A1251B4845E6007616D8 /* OpportunityHelper.swift in Sources */,
 				E7C324E71B3352CE0010F652 /* HomeViewController.swift in Sources */,
 				E70473F51B34DAB900E61CC9 /* Constants.swift in Sources */,
 			);
