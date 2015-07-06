@@ -14,6 +14,7 @@ class OpportunityTableViewController: WKInterfaceController, WCSessionDelegate {
     
     var session : WCSession!
     
+    @IBOutlet var debugLabel: WKInterfaceLabel!
     @IBOutlet var optyTable: WKInterfaceTable!
     
     override func awakeWithContext(context: AnyObject?) {
@@ -32,28 +33,15 @@ class OpportunityTableViewController: WKInterfaceController, WCSessionDelegate {
             
             
             if (WCSession.defaultSession().reachable) {
-                print("about to send message")
                 session.sendMessage(applicationData, replyHandler: { reply in
                     //handle iphone response here
-                    dispatch_async(dispatch_get_main_queue()) {
-                        //self.optyNameLabel.setText("got resp")
-                    }
                     if(reply["success"] != nil) {
-                        //let s = reply["response"] as! String
-                        
-                        if let records = reply["success"] as? NSArray {
-                            self.loadTableData(records)
-                        }
-                        //if let records = reply["success"] as? [AnyObject] {
-                          //  dispatch_async(dispatch_get_main_queue()) {
-                                //self.optyNameLabel.setText("success")
-                            //}
-                       // }
-                        
+                        let a:AnyObject = reply["success"] as! NSDictionary
+                        self.loadTableData(a as! NSDictionary)
                     }
                     
                 }, errorHandler: {(error ) -> Void in
-                        // catch any errors here
+                    // catch any errors here
                 })
             }
             
@@ -61,15 +49,19 @@ class OpportunityTableViewController: WKInterfaceController, WCSessionDelegate {
         
     }
     
-    private func loadTableData(results: NSArray) {
-        optyTable.setNumberOfRows(results.count, withRowType: "OptyRows")
+    private func loadTableData(results: NSDictionary) {
+       //results come in 3 elements* "done"(bool), "totalSize"(nsnumber), and "records"(NSArray)
         
-        for (index, record) in results.enumerate() {
+        let records:NSArray = results["records"] as! NSArray
+        optyTable.setNumberOfRows(records.count, withRowType: "OptyRows")
+        
+        for (index, record) in records.enumerate() {
             let row = optyTable.rowControllerAtIndex(index) as! OpportunityRowController
             
             let s: NSDictionary = record as! NSDictionary
             
             row.opportunityNameLabel.setText(s["Name"] as? String)
+           
             row.opportunityId = s["Id"] as? String
             row.name = s["Name"] as? String
             row.amount = s["Amount"] as? String
@@ -78,6 +70,7 @@ class OpportunityTableViewController: WKInterfaceController, WCSessionDelegate {
             row.fiscal = s["Fiscal"] as? String
             row.fiscalQuarter = s["FiscalQuarter"] as? String
             row.fiscalYear = s["FiscalYear"] as? String
+
         }
     }
 
