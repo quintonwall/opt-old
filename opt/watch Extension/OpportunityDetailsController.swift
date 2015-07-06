@@ -13,7 +13,7 @@ import WatchConnectivity
 
 
 
-class InterfaceController: WKInterfaceController, WCSessionDelegate {
+class OpportunityDetailsController: WKInterfaceController, WCSessionDelegate {
 
     @IBOutlet var optyNameLabel: WKInterfaceLabel!
     @IBOutlet var optyAmountLabel: WKInterfaceLabel!
@@ -23,16 +23,36 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     @IBOutlet var optyStageLabel: WKInterfaceLabel!
     
     var session : WCSession!
+    var opty: OpportunityRowController!
     
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
+        
+        if let opty = context as? OpportunityRowController {
+            self.opty = opty
+            setTitle(opty.name)
+            bindToInterface(opty)
+        }
+        
     }
     
     override func willActivate() {
         super.willActivate()
         
         
+    }
+    
+    private func bindToInterface(o: OpportunityRowController) {
+        optyNameLabel.setText(o.name)
+        //todo: math function to div into millions,billions and set amount indicator
+        optyAmountLabel.setText(o.getAbbreviatedOpportunityAmount())
+        optyStageLabel.setText(o.stageName)
+        
+        let formatter = NSDateFormatter()
+        formatter.dateStyle = NSDateFormatterStyle.ShortStyle
+        //formatter.timeStyle = .MediumStyle
+        optyDateLabel.setText(o.getFormattedCloseDate())
     }
     
        

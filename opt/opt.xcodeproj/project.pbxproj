@@ -17,7 +17,7 @@
 		E774516F1B39E16400A1D46B /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E774516D1B39E16400A1D46B /* Interface.storyboard */; };
 		E77451711B39E16400A1D46B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E77451701B39E16400A1D46B /* Assets.xcassets */; };
 		E77451781B39E16400A1D46B /* watch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E77451771B39E16400A1D46B /* watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		E774517F1B39E16500A1D46B /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E774517E1B39E16500A1D46B /* InterfaceController.swift */; };
+		E774517F1B39E16500A1D46B /* OpportunityDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E774517E1B39E16500A1D46B /* OpportunityDetailsController.swift */; };
 		E77451811B39E16500A1D46B /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77451801B39E16500A1D46B /* ExtensionDelegate.swift */; };
 		E77451831B39E16500A1D46B /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77451821B39E16500A1D46B /* NotificationController.swift */; };
 		E77451851B39E16500A1D46B /* GlanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77451841B39E16500A1D46B /* GlanceController.swift */; };
@@ -108,7 +108,7 @@
 		E77451721B39E16400A1D46B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E77451771B39E16400A1D46B /* watch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "watch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E774517D1B39E16500A1D46B /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
-		E774517E1B39E16500A1D46B /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		E774517E1B39E16500A1D46B /* OpportunityDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpportunityDetailsController.swift; sourceTree = "<group>"; };
 		E77451801B39E16500A1D46B /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		E77451821B39E16500A1D46B /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		E77451841B39E16500A1D46B /* GlanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlanceController.swift; sourceTree = "<group>"; };
@@ -198,7 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				E77451951B39E31100A1D46B /* watch Extension.entitlements */,
-				E774517E1B39E16500A1D46B /* InterfaceController.swift */,
+				E774517E1B39E16500A1D46B /* OpportunityDetailsController.swift */,
 				E77451801B39E16500A1D46B /* ExtensionDelegate.swift */,
 				E77451821B39E16500A1D46B /* NotificationController.swift */,
 				E77451841B39E16500A1D46B /* GlanceController.swift */,
@@ -538,7 +538,7 @@
 				E77451831B39E16500A1D46B /* NotificationController.swift in Sources */,
 				E77451811B39E16500A1D46B /* ExtensionDelegate.swift in Sources */,
 				5AE32A581B4A0E13004417D6 /* OpportunityRowController.swift in Sources */,
-				E774517F1B39E16500A1D46B /* InterfaceController.swift in Sources */,
+				E774517F1B39E16500A1D46B /* OpportunityDetailsController.swift in Sources */,
 				E77451851B39E16500A1D46B /* GlanceController.swift in Sources */,
 				5AE32A561B48C332004417D6 /* OpportunityTableViewController.swift in Sources */,
 			);

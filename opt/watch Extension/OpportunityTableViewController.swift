@@ -14,8 +14,8 @@ class OpportunityTableViewController: WKInterfaceController, WCSessionDelegate {
     
     var session : WCSession!
     
-    @IBOutlet var debugLabel: WKInterfaceLabel!
-    @IBOutlet var optyTable: WKInterfaceTable!
+    
+     @IBOutlet var optyTable: WKInterfaceTable!
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
@@ -64,13 +64,22 @@ class OpportunityTableViewController: WKInterfaceController, WCSessionDelegate {
            
             row.opportunityId = s["Id"] as? String
             row.name = s["Name"] as? String
-            row.amount = s["Amount"] as? String
+            row.amount = s["Amount"] as? Double
             row.closeDate = s["CloseDate"] as? String
             row.stageName = s["StageName"] as? String
             row.fiscal = s["Fiscal"] as? String
-            row.fiscalQuarter = s["FiscalQuarter"] as? String
-            row.fiscalYear = s["FiscalYear"] as? String
+            row.fiscalQuarter = s["FiscalQuarter"] as? Int
+            row.fiscalYear = s["FiscalYear"] as? Int
 
+        }
+    }
+    
+    override func contextForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> AnyObject? {
+        if segueIdentifier == "optyDetails" {
+            let opty:OpportunityRowController = table.rowControllerAtIndex(rowIndex) as! OpportunityRowController
+            return opty
+        } else {
+            return nil //then we have a problem houston!
         }
     }
 

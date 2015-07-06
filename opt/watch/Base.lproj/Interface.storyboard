@@ -16,14 +16,13 @@
             <string>AvenirNext-UltraLight</string>
             <string>AvenirNext-UltraLight</string>
             <string>AvenirNext-UltraLight</string>
-            <string>AvenirNext-UltraLight</string>
         </mutableArray>
     </customFonts>
     <scenes>
         <!--Main View-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller backgroundImage="background-blue40%" contentMode="scaleAspectFill" id="AgC-eL-Hgc" userLabel="Main View" customClass="InterfaceController" customModule="watch" customModuleProvider="target">
+                <controller identifier="details" title="Details" backgroundImage="background-blue40%" contentMode="scaleAspectFill" id="AgC-eL-Hgc" userLabel="Main View" customClass="OpportunityDetailsController" customModule="watch_Extension">
                     <items>
                         <label alignment="center" text="Opportunity Name" id="NuO-yW-Url">
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -31,13 +30,9 @@
                         </label>
                         <group width="1" height="80" alignment="left" verticalAlignment="center" id="SLH-0O-e54" userLabel="Opty-Amount-Group">
                             <items>
-                                <label height="50" alignment="center" verticalAlignment="center" text="$200" textAlignment="center" id="uSQ-WC-2HV">
+                                <label alignment="center" verticalAlignment="center" text="200" textAlignment="center" id="uSQ-WC-2HV">
                                     <color key="textColor" red="0.85490196080000003" green="0.0" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
-                                    <fontDescription key="font" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="50"/>
-                                </label>
-                                <label alignment="center" verticalAlignment="center" text="m" textAlignment="right" id="74Q-wz-YEi">
-                                    <color key="textColor" red="0.85490196080000003" green="0.0" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
-                                    <fontDescription key="font" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="16"/>
+                                    <fontDescription key="font" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="60"/>
                                 </label>
                             </items>
                         </group>
@@ -66,7 +61,6 @@
                     </items>
                     <color key="backgroundColor" red="0.36078431370000003" green="0.67450980390000004" blue="1" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                     <connections>
-                        <outlet property="optyAmountIndicatorLabel" destination="74Q-wz-YEi" id="F5E-6w-NVr"/>
                         <outlet property="optyAmountLabel" destination="uSQ-WC-2HV" id="vFb-83-g89"/>
                         <outlet property="optyDateLabel" destination="nGH-OL-3xy" id="sN2-v8-E8i"/>
                         <outlet property="optyNameLabel" destination="NuO-yW-Url" id="Uup-f7-es5"/>
@@ -132,6 +126,7 @@
                                     <connections>
                                         <outlet property="opportunityNameLabel" destination="yH2-HW-4YV" id="h0P-2c-B5Z"/>
                                         <outlet property="rowIcon" destination="nah-Md-bKm" id="cPu-8Q-Zpy"/>
+                                        <segue destination="AgC-eL-Hgc" kind="push" identifier="optyDetails" id="JVB-km-M20"/>
                                     </connections>
                                 </tableRow>
                             </items>
@@ -140,7 +135,6 @@
                     <color key="backgroundColor" red="0.36078431370000003" green="0.67450980390000004" blue="1" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                     <connections>
                         <outlet property="optyTable" destination="Fa7-21-UbT" id="PBD-79-1bE"/>
-                        <segue destination="IVz-0d-tyy" kind="relationship" relationship="nextPage" id="4bC-lP-yZ4"/>
                     </connections>
                 </controller>
             </objects>
