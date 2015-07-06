@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8121.17" systemVersion="15A178w" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8121.20" systemVersion="14E11f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8101.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8101.16"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -76,22 +76,19 @@
                             </label>
                         </subviews>
                         <animations/>
-                        <color key="backgroundColor" red="0.35919470877493809" green="0.67420480433239827" blue="1" alpha="0.90308277027027029" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.36078431372549019" green="0.67450980392156867" blue="1" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Hsg-jr-23w" firstAttribute="top" secondItem="h5x-Z6-0QW" secondAttribute="bottom" constant="52" id="4o2-Aa-hVU">
                                 <variation key="heightClass=compact" constant="19"/>
                                 <variation key="widthClass=regular" constant="46"/>
                             </constraint>
-                            <constraint firstItem="h5x-Z6-0QW" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="122" id="Ebc-78-Wo7">
-                                <variation key="heightClass=compact" constant="36"/>
-                                <variation key="widthClass=regular" constant="10"/>
-                            </constraint>
+                            <constraint firstItem="h5x-Z6-0QW" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="122" id="Ilk-UW-hl3"/>
                             <constraint firstItem="Hsg-jr-23w" firstAttribute="leading" secondItem="h5x-Z6-0QW" secondAttribute="leading" id="M9k-hC-aTE">
                                 <variation key="widthClass=regular" constant="-49"/>
                             </constraint>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ZVY-BJ-44T" secondAttribute="bottom" constant="38" id="Vud-Kt-5if"/>
                             <constraint firstItem="Hsg-jr-23w" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cEB-IF-r5z"/>
                             <constraint firstItem="ZVY-BJ-44T" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="f84-cj-v27"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ZVY-BJ-44T" secondAttribute="bottom" constant="38" id="kXt-t1-wde"/>
                             <constraint firstItem="h5x-Z6-0QW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="rSz-bo-bn0"/>
                         </constraints>
                         <variation key="default">
@@ -204,10 +201,10 @@
                                 <exclude reference="Grl-A9-PSy"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="7Ts-wo-Xap"/>
-                                <exclude reference="AIa-6l-dQH"/>
                                 <exclude reference="EDl-Xo-IH2"/>
                                 <exclude reference="c6v-dc-DPC"/>
+                                <exclude reference="7Ts-wo-Xap"/>
+                                <exclude reference="AIa-6l-dQH"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
@@ -222,10 +219,10 @@
                                 <include reference="Grl-A9-PSy"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="7Ts-wo-Xap"/>
-                                <include reference="AIa-6l-dQH"/>
                                 <include reference="EDl-Xo-IH2"/>
                                 <include reference="c6v-dc-DPC"/>
+                                <include reference="7Ts-wo-Xap"/>
+                                <include reference="AIa-6l-dQH"/>
                             </mask>
                         </variation>
                     </view>

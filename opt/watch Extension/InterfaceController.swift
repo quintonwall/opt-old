@@ -32,29 +32,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     override func willActivate() {
         super.willActivate()
         
-        if (WCSession.isSupported()) {
-            session = WCSession.defaultSession()
-            session.delegate = self
-            session.activateSession()
-            
-            let applicationData = ["opportunities":"fetchall"]
-            optyNameLabel.setText("registered")
-            
-           
-            if (WCSession.defaultSession().reachable) {
-                print("about to send message")
-                session.sendMessage(applicationData, replyHandler: { reply in
-                    //handle iphone response here
-                    let s = reply["response"] as! String
-                        dispatch_async(dispatch_get_main_queue()) {
-                            self.optyNameLabel.setText(s)
-                        }
-                    }, errorHandler: {(error ) -> Void in
-                        // catch any errors here
-               })
-            }
-
-        }
         
     }
     

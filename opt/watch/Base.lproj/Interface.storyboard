@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="8121.20" systemVersion="14E11f" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc" defaultGlanceController="0uZ-2p-rRc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="8121.20" systemVersion="14E11f" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="8RM-f4-sW4" defaultGlanceController="0uZ-2p-rRc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8101.16"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="8066.14"/>
@@ -7,11 +7,15 @@
     <customFonts key="customFonts">
         <mutableArray key="Avenir.ttc">
             <string>Avenir-Light</string>
-            <string>Avenir-Book</string>
-            <string>Avenir-Book</string>
-            <string>Avenir-Book</string>
+            <string>Avenir-Light</string>
         </mutableArray>
         <mutableArray key="AvenirNext.ttc">
+            <string>AvenirNext-UltraLight</string>
+            <string>AvenirNext-UltraLight</string>
+            <string>AvenirNext-UltraLight</string>
+            <string>AvenirNext-UltraLight</string>
+            <string>AvenirNext-UltraLight</string>
+            <string>AvenirNext-UltraLight</string>
             <string>AvenirNext-UltraLight</string>
         </mutableArray>
     </customFonts>
@@ -19,46 +23,48 @@
         <!--Main View-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller backgroundImage="background-radius40%" contentMode="scaleAspectFill" id="AgC-eL-Hgc" userLabel="Main View" customClass="InterfaceController" customModule="watch" customModuleProvider="target">
+                <controller backgroundImage="background-blue40%" contentMode="scaleAspectFill" id="AgC-eL-Hgc" userLabel="Main View" customClass="InterfaceController" customModule="watch" customModuleProvider="target">
                     <items>
                         <label alignment="center" text="Opportunity Name" id="NuO-yW-Url">
-                            <color key="textColor" red="0.27669267720000001" green="0.75121089789999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="font" name="Avenir-Light" family="Avenir" pointSize="14"/>
                         </label>
                         <group width="1" height="80" alignment="left" verticalAlignment="center" id="SLH-0O-e54" userLabel="Opty-Amount-Group">
                             <items>
                                 <label height="50" alignment="center" verticalAlignment="center" text="$200" textAlignment="center" id="uSQ-WC-2HV">
+                                    <color key="textColor" red="0.85490196080000003" green="0.0" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="font" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="50"/>
                                 </label>
                                 <label alignment="center" verticalAlignment="center" text="m" textAlignment="right" id="74Q-wz-YEi">
-                                    <color key="textColor" red="0.28205976100000002" green="0.66648859039999997" blue="0.700875947" alpha="1" colorSpace="calibratedRGB"/>
-                                    <fontDescription key="font" name="Avenir-Book" family="Avenir" pointSize="16"/>
+                                    <color key="textColor" red="0.85490196080000003" green="0.0" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="16"/>
                                 </label>
                             </items>
                         </group>
                         <group width="1" alignment="left" verticalAlignment="bottom" id="1K3-CS-xVY" userLabel="Bottom-Controls">
                             <items>
-                                <group width="70" alignment="right" verticalAlignment="center" layout="vertical" id="Hmk-pw-UlZ" userLabel="Right-Bottom">
+                                <group width="0.5" alignment="right" layout="vertical" id="3NO-KC-b0p" userLabel="Right-Bottom">
                                     <items>
-                                        <button width="20" height="30" alignment="center" backgroundImage="opt-contract" id="ld7-FZ-LRm"/>
-                                        <label alignment="center" verticalAlignment="bottom" text="Prospecting" id="XN2-gG-jfM">
-                                            <color key="textColor" red="0.27669267720000001" green="0.75121089789999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <fontDescription key="font" name="Avenir-Book" family="Avenir" pointSize="16"/>
+                                        <button width="25" height="25" alignment="center" verticalAlignment="center" backgroundImage="calender_L" id="YXQ-hI-w9F"/>
+                                        <label alignment="center" verticalAlignment="bottom" text="7/2/15" textAlignment="center" id="nGH-OL-3xy">
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="font" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="14"/>
                                         </label>
                                     </items>
                                 </group>
-                                <group width="70" alignment="left" verticalAlignment="center" layout="vertical" id="rfK-Ga-H8U" userLabel="Left-Bottom">
+                                <group width="0.5" alignment="left" verticalAlignment="center" layout="vertical" id="Hmk-pw-UlZ" userLabel="Left-Bottom">
                                     <items>
-                                        <button width="30" height="30" alignment="center" backgroundImage="calender_L" id="YXQ-hI-w9F"/>
-                                        <label alignment="center" verticalAlignment="bottom" text="7/2/15" id="nGH-OL-3xy">
-                                            <color key="textColor" red="0.27669267720000001" green="0.75121089789999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <fontDescription key="font" name="Avenir-Book" family="Avenir" pointSize="16"/>
+                                        <button width="25" height="25" alignment="center" verticalAlignment="center" backgroundImage="default" id="ld7-FZ-LRm"/>
+                                        <label alignment="center" verticalAlignment="bottom" text="Prospecting" textAlignment="center" id="XN2-gG-jfM">
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="font" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="14"/>
                                         </label>
                                     </items>
                                 </group>
                             </items>
                         </group>
                     </items>
+                    <color key="backgroundColor" red="0.36078431370000003" green="0.67450980390000004" blue="1" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                     <connections>
                         <outlet property="optyAmountIndicatorLabel" destination="74Q-wz-YEi" id="F5E-6w-NVr"/>
                         <outlet property="optyAmountLabel" destination="uSQ-WC-2HV" id="vFb-83-g89"/>
@@ -69,7 +75,76 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="235" y="347"/>
+            <point key="canvasLocation" x="495" y="120"/>
+        </scene>
+        <!--Setting-->
+        <scene sceneID="s3D-y4-whg">
+            <objects>
+                <controller identifier="Settings" title="Setting" backgroundImage="background-blue40%" hidesWhenLoading="NO" id="IVz-0d-tyy">
+                    <items>
+                        <group width="1" alignment="left" layout="vertical" id="0ra-vX-7xi">
+                            <items>
+                                <switch width="52" alignment="center" verticalAlignment="bottom" id="JTB-8v-mj0">
+                                    <fontDescription key="font" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="16"/>
+                                </switch>
+                                <label width="1" alignment="left" text="Fetch Next Qtr?" textAlignment="center" id="JWi-WJ-hcs">
+                                    <fontDescription key="font" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="16"/>
+                                </label>
+                            </items>
+                        </group>
+                        <separator alignment="left" alpha="0.29999999999999999" id="f6h-Cy-RFZ">
+                            <color key="color" red="0.20947001530000001" green="0.33893079990000002" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                        </separator>
+                        <group width="1" alignment="left" layout="vertical" id="Fe3-oA-qKQ">
+                            <items>
+                                <label width="1" alignment="left" text="Max Amount" textAlignment="center" id="Gwd-Kw-cmc">
+                                    <fontDescription key="font" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="16"/>
+                                </label>
+                                <slider width="1" alignment="left" value="1" maximum="3" steps="3" id="DM9-4V-CZU"/>
+                            </items>
+                        </group>
+                        <button width="1" alignment="left" title="Save" id="Me5-MD-ePp">
+                            <color key="backgroundColor" red="0.20947001530000001" green="0.33893079990000002" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                        </button>
+                    </items>
+                    <color key="backgroundColor" red="0.36078431370000003" green="0.67450980390000004" blue="1" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="235" y="437"/>
+        </scene>
+        <!--Opt-->
+        <scene sceneID="PeF-qc-Hyj">
+            <objects>
+                <controller identifier="OpportunityList" title="Opt" backgroundImage="background-blue40%" hidesWhenLoading="NO" id="8RM-f4-sW4" customClass="OpportunityTableViewController" customModule="watch_Extension">
+                    <items>
+                        <table alignment="left" id="Fa7-21-UbT">
+                            <items>
+                                <tableRow identifier="OptyRows" id="R1x-WE-d9z" customClass="OpportunityRowController" customModule="watch_Extension">
+                                    <group key="rootItem" width="1" alignment="left" id="MgZ-Hf-DF8">
+                                        <items>
+                                            <imageView width="20" height="20" alignment="left" verticalAlignment="center" image="tablerow icon" contentMode="scaleAspectFit" id="nah-Md-bKm"/>
+                                            <label alignment="left" verticalAlignment="center" text="Opportunity Name" textAlignment="left" id="yH2-HW-4YV">
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="font" name="Avenir-Light" family="Avenir" pointSize="12"/>
+                                            </label>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="opportunityNameLabel" destination="yH2-HW-4YV" id="h0P-2c-B5Z"/>
+                                        <outlet property="rowIcon" destination="nah-Md-bKm" id="cPu-8Q-Zpy"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <color key="backgroundColor" red="0.36078431370000003" green="0.67450980390000004" blue="1" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                    <connections>
+                        <outlet property="optyTable" destination="Fa7-21-UbT" id="PBD-79-1bE"/>
+                        <segue destination="IVz-0d-tyy" kind="relationship" relationship="nextPage" id="4bC-lP-yZ4"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="235" y="116"/>
         </scene>
         <!--glance-->
         <scene sceneID="BOz-TT-tkC">

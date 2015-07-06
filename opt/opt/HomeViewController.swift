@@ -25,23 +25,24 @@ class HomeViewController: UIViewController, WCSessionDelegate {
         settingsButton.layer.borderColor = UIColor.whiteColor().CGColor
     
         
-        
+        /*
         if (WCSession.isSupported()) {
             session = WCSession.defaultSession()
             session.delegate = self;
             session.activateSession()
         }
+*/
         
         //SEND A MESSAGE TO THE WATCH TO WELCOME LOGGED IN USER
         
-        let applicationData = ["username":SFUserAccountManager.sharedInstance().currentUser.userName]
+      //  let applicationData = ["username":SFUserAccountManager.sharedInstance().currentUser.userName]
         
         //EXAMPLE OF SENDING DATA TO PHONE
-        session.sendMessage(applicationData, replyHandler: {([String : AnyObject]) -> Void in
+      //  session.sendMessage(applicationData, replyHandler: {([String : AnyObject]) -> Void in
             // handle reply from watch app here
-            }, errorHandler: {(error ) -> Void in
+        //    }, errorHandler: {(error ) -> Void in
                 // catch any errors here
-        })
+      //  })
 
 
        // var userDict = [String: String]()
@@ -55,6 +56,7 @@ class HomeViewController: UIViewController, WCSessionDelegate {
     }
     
     
+    /*
     
     //receive a message from the watch
     func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
@@ -65,6 +67,7 @@ class HomeViewController: UIViewController, WCSessionDelegate {
            self.tempLabel.text = val
         }
     }
+*/
 
     
 }

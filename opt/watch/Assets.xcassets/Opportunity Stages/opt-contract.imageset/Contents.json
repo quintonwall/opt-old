@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "opt-contract@1x.png",
+      "filename" : "pen_L.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "opt-contract@2x.png",
+      "filename" : "pen_L@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "opt-contract@3x.png",
+      "filename" : "pen_L@3x.png",
       "scale" : "3x"
     }
   ],

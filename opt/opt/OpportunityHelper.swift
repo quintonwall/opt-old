@@ -10,7 +10,7 @@ import Foundation
 import WatchConnectivity
 
 
-class OpportunityHelper: NSObject, WCSessionDelegate {
+class OpportunityHelper: NSObject, WCSessionDelegate, SFRestDelegate {
     
      var session: WCSession!
     
@@ -31,13 +31,59 @@ class OpportunityHelper: NSObject, WCSessionDelegate {
     }
     
     func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
-       // let val = message["fromwatch"] as? String
-        replyHandler(["response": "100"])
-       // dispatch_async(dispatch_get_main_queue()) {
-         //   self.tempLabel.text = val
-        //}
+       print("heard a request")
+       //make sure we are logged in
+        if( SFUserAccountManager.sharedInstance().currentUser == nil) {
+             print("not logged in")
+             replyHandler(["error": "not logged in"])
+        } else {
+        
+             print("prep request")
+            let reqType = message["request-type"] as! String
+            
+            let sharedInstance = SFRestAPI.sharedInstance()
+            
+            if(reqType == "fetchall") {
+                
+                let nextQtr = message["param1"] as! Bool
+                let maxAmt = message["param2"] as! Int
+                
+                let query = getAllOpportunitiesQuery(self, nextQuarter: nextQtr, maxOpportunityAmount: maxAmt)
+                
+                sharedInstance.performSOQLQuery(query, failBlock: { error in
+                    replyHandler(["error": error])
+                    }) { response in  //success
+                        print("sending successful response")
+                        replyHandler(["success": response])
+                }
+                
+            } else {
+                replyHandler(["error": "no such request-type: "+reqType])
+            }
+        }
+        
+        
+        
+        
+        
     }
 
+
+    
+    //Salesforce Mobile SDK calls
+    
+    func getAllOpportunitiesQuery(delegate: SFRestDelegate, nextQuarter: Bool, maxOpportunityAmount: Int) -> String{
+        
+        var quarter = "THIS_QUARTER"
+        if(nextQuarter) {
+            quarter = "NEXT_QUARTER"
+        }
+       
+        
+       return "SELECT Id, Name, Amount, CloseDate, StageName, Fiscal, FiscalQuarter, FiscalYear FROM Opportunity WHERE Amount <= "+String(maxOpportunityAmount)+" and CloseDate =  "+quarter+" order by CloseDate"
+        
+        
+    }
     
     
 }
