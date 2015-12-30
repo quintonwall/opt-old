@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		24B7074F94B33E4B3C08E6A5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 489B46DC9696C4013A4EC560 /* libPods.a */; };
+		0960EFFDB511EDD6C533B208 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A8A765325236F77E848161F /* Pods.framework */; };
 		5AE32A541B4876E0004417D6 /* Opportunity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE32A531B4876E0004417D6 /* Opportunity.swift */; };
 		5AE32A561B48C332004417D6 /* OpportunityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE32A551B48C332004417D6 /* OpportunityTableViewController.swift */; };
 		5AE32A581B4A0E13004417D6 /* OpportunityRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE32A571B4A0E13004417D6 /* OpportunityRowController.swift */; };
@@ -91,7 +91,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		489B46DC9696C4013A4EC560 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A8A765325236F77E848161F /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AE32A531B4876E0004417D6 /* Opportunity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Opportunity.swift; sourceTree = "<group>"; };
 		5AE32A551B48C332004417D6 /* OpportunityTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpportunityTableViewController.swift; sourceTree = "<group>"; };
 		5AE32A571B4A0E13004417D6 /* OpportunityRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpportunityRowController.swift; sourceTree = "<group>"; };
@@ -116,6 +116,7 @@
 		E77451881B39E16500A1D46B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E77451941B39E30000A1D46B /* watch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = watch.entitlements; sourceTree = "<group>"; };
 		E77451951B39E31100A1D46B /* watch Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "watch Extension.entitlements"; sourceTree = "<group>"; };
+		E7A67E361C344AEF00F57B62 /* SalesforceMobileSDK_iOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SalesforceMobileSDK_iOS.framework; path = "Pods/../build/Debug-iphoneos/SalesforceMobileSDK_iOS.framework"; sourceTree = "<group>"; };
 		E7C324E61B3352CE0010F652 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		E7E7B63D1B3322A60052C290 /* opt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = opt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7E7B6401B3322A60052C290 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -145,7 +146,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24B7074F94B33E4B3C08E6A5 /* libPods.a in Frameworks */,
+				0960EFFDB511EDD6C533B208 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,7 +170,8 @@
 		A814264387768C2AAFD97EE9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				489B46DC9696C4013A4EC560 /* libPods.a */,
+				E7A67E361C344AEF00F57B62 /* SalesforceMobileSDK_iOS.framework */,
+				5A8A765325236F77E848161F /* Pods.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -331,6 +333,7 @@
 				E7E7B63B1B3322A60052C290 /* Resources */,
 				0E94C726003268D3A3EF4F4A /* Copy Pods Resources */,
 				E77451931B39E16500A1D46B /* Embed Watch Content */,
+				B48537658FBE4FF9B7D1C84E /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -511,6 +514,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B48537658FBE4FF9B7D1C84E /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B4F401852F41BFEE7ECEBFDA /* Check Pods Manifest.lock */ = {
@@ -801,7 +819,12 @@
 				CODE_SIGN_ENTITLEMENTS = opt/opt.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				INFOPLIST_FILE = opt/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gypsycode.opt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -818,7 +841,12 @@
 				CODE_SIGN_ENTITLEMENTS = opt/opt.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				INFOPLIST_FILE = opt/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gypsycode.opt;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -26,13 +26,13 @@
 #import "SFRestRequest+Internal.h"
 #import "SFRestAPISalesforceAction.h"
 #import <SalesforceNetwork/CSFSalesforceAction.h>
-#import <SalesforceOAuth/SFOAuthCoordinator.h>
+#import <SalesforceSDKCore/SFOAuthCoordinator.h>
 #import <SalesforceSDKCore/SFUserAccount.h>
 #import <SalesforceSDKCore/SFAuthenticationManager.h>
 #import <SalesforceSDKCore/SFSDKWebUtils.h>
 #import <SalesforceSDKCore/SalesforceSDKManager.h>
 
-NSString* const kSFRestDefaultAPIVersion = @"v33.0";
+NSString* const kSFRestDefaultAPIVersion = @"v34.0";
 NSString* const kSFRestErrorDomain = @"com.salesforce.RestAPI.ErrorDomain";
 NSInteger const kSFRestErrorCode = 999;
 
@@ -140,7 +140,7 @@ static BOOL kIsTestRun;
 /**
  Set a user agent string based on the mobile SDK version.
  We are building a user agent of the form:
- SalesforceMobileSDK/1.0 iPhone OS/3.2.0 (iPad) AppName/AppVersion Native [Current User Agent]
+ SalesforceMobileSDK/1.0 iPhone OS/3.2.0 (iPad) AppName/AppVersion Native uid_<device id> [Current User Agent]
  */
 + (NSString *)userAgentString {
     return [SFRestAPI userAgentString:@""];

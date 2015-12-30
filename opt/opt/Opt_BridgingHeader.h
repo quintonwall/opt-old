@@ -12,7 +12,22 @@
 
 #endif /* Opt_BridgingHeader_h */
 
-#import <SalesforceCommonUtils/SFLogger.h>
+/*
+#import "SFLogger.h"
+#import "SFUserAccountManager.h"
+#import "SalesforceSDKManager.h"
+#import "SFAuthenticationManager.h"
+#import "SFPushNotificationManager.h"
+#import "SFDefaultUserManagementViewController.h"
+#import "SalesforceRestAPI/SFRestAPI.h"
+#import "SFRestAPISalesforceAction.h"
+#import "SFRestAPI+Blocks.h"
+#import "SFRestAPI+Files.h"
+#import "SFOAuthInfo.h"
+*/
+
+
+#import <SalesforceSDKCore/SFLogger.h>
 #import <SalesforceSDKCore/SFUserAccountManager.h>
 #import <SalesforceSDKCore/SalesforceSDKManager.h>
 #import <SalesforceSDKCore/SFAuthenticationManager.h>
@@ -22,4 +37,4 @@
 #import <SalesforceRestAPI/SFRestAPISalesforceAction.h>
 #import <SalesforceRestAPI/SFRestAPI+Blocks.h>
 #import <SalesforceRestAPI/SFRestAPI+Files.h>
-#import <SalesforceOAuth/SFOAuthInfo.h>
+#import <SalesforceSDKCore/SFOAuthInfo.h>

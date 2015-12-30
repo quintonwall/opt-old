@@ -22,12 +22,10 @@
  WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "SFUserAccount.h"
-#import "SFUserAccountManager.h"
+#import "SFUserAccount+Internal.h"
+#import "SFUserAccountManager+Internal.h"
 #import "SFDirectoryManager.h"
-
-#import <SalesforceOAuth/SFOAuthCredentials.h>
-#import <SalesforceCommonUtils/SFLogger.h>
+#import "SFOAuthCredentials.h"
 
 static NSString * const kUser_ACCESS_SCOPES     = @"accessScopes";
 static NSString * const kUser_CREDENTIALS       = @"credentials";
@@ -53,6 +51,9 @@ static NSString * const kGlobalScopingKey = @"-global-";
 }
 
 @property (nonatomic, strong) NSMutableDictionary *customData;
+@property (nonatomic, readwrite, getter = isGuestUser) BOOL guestUser;
+
+- (id)initWithCoder:(NSCoder*)decoder NS_DESIGNATED_INITIALIZER;
 
 @end
 
@@ -66,18 +67,29 @@ static NSString * const kGlobalScopingKey = @"-global-";
     return [NSSet setWithObjects:@"communityId", @"credentials", nil];
 }
 
-- (id)init {
+- (instancetype)init {
     return [self initWithIdentifier:[SFUserAccountManager sharedInstance].oauthClientId];
 }
 
-- (id)initWithIdentifier:(NSString*)identifier {
+- (instancetype)initWithIdentifier:(NSString*)identifier {
+    return [self initWithIdentifier:identifier clientId:[SFUserAccountManager sharedInstance].oauthClientId];
+}
+
+- (instancetype)initWithIdentifier:(NSString*)identifier clientId:(NSString*)clientId {
     self = [super init];
     if (self) {
         _observingCredentials = NO;
-        NSString *clientId = [SFUserAccountManager sharedInstance].oauthClientId;
         SFOAuthCredentials *creds = [[SFOAuthCredentials alloc] initWithIdentifier:identifier clientId:clientId encrypted:YES];
         [SFUserAccountManager applyCurrentLogLevel:creds];
         self.credentials = creds;
+    }
+    return self;
+}
+
+- (instancetype)initWithGuestUser {
+    self = [super init];
+    if (self) {
+        self.guestUser = YES;
     }
     return self;
 }
@@ -168,7 +180,8 @@ static NSString * const kGlobalScopingKey = @"-global-";
 - (UIImage*)photo {
     if (nil == _photo) {
         NSString *photoPath = [self photoPath];
-        if ([[NSFileManager defaultManager] fileExistsAtPath:photoPath]) {
+        NSFileManager *manager = [[NSFileManager alloc] init];
+        if ([manager fileExistsAtPath:photoPath]) {
             _photo = [[UIImage alloc] initWithContentsOfFile:photoPath];
         }
     }
@@ -178,7 +191,7 @@ static NSString * const kGlobalScopingKey = @"-global-";
 - (void)setPhoto:(UIImage *)photo {
     NSError *error = nil;
     NSString *photoPath = [self photoPath];
-    NSFileManager *fm = [NSFileManager defaultManager];
+    NSFileManager *fm = [[NSFileManager alloc] init];
     if ([fm fileExistsAtPath:photoPath]) {
         if (![fm removeItemAtPath:photoPath error:&error]) {
             [self log:SFLogLevelError format:@"Unable to remove previous photo from disk: %@", error];
@@ -251,14 +264,31 @@ static NSString * const kGlobalScopingKey = @"-global-";
 }
 
 - (BOOL)isSessionValid {
+
     // A session is considered "valid" when the user
     // has an access token as well as the identity data
     return self.credentials.accessToken != nil && self.idData != nil;
 }
 
+- (BOOL)isTemporaryUser {
+    return [SFUserAccountManager isUserTemporary:self];
+}
+
+- (BOOL)isAnonymousUser {
+    return [SFUserAccountManager isUserAnonymous:self];
+}
+
 - (NSString*)description {
+    NSString *theUserName = @"*****";
+    NSString *theFullName = @"*****";
+    
+#ifdef DEBUG
+    theUserName = self.userName;
+    theFullName = self.fullName;
+#endif
+    
     NSString * s = [NSString stringWithFormat:@"<SFUserAccount username=%@ fullName=%@ accessScopes=%@ credentials=%@, community=%@>",
-                    self.userName, self.fullName, self.accessScopes, self.credentials, self.communityId];
+                    theUserName, theFullName, self.accessScopes, self.credentials, self.communityId];
     return s;
 }
 

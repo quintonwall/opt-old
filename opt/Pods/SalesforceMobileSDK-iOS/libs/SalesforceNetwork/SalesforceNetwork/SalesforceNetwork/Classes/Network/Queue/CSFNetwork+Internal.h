@@ -32,6 +32,7 @@
 @protected
     NSNumber *_offlineCacheEnabled;
     NSPointerArray *_outputCachePointers;
+    NSString *_defaultConnectCommunityId;
 }
 
 /**
@@ -48,9 +49,15 @@
 
 @property (nonatomic, strong, readwrite) SFUserAccount *account;
 @property (atomic, readwrite, getter=isRefreshingAccessToken) BOOL refreshingAccessToken;
+@property (nonatomic, strong, readwrite) NSProgress *progress;
 
 @property (nonatomic, strong) NSOperationQueue *queue;
 @property (nonatomic, readwrite, strong) NSURLSession *ephemeralSession;
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_8_0
+@property (nonatomic, strong) NSURLSession *backgroundSession;
+#endif
+
 @property (nonatomic, copy) NSString *userAgent;
 @property (nonatomic, assign, readwrite) NSUInteger actionCount;
 @property (nonatomic, strong, readonly) NSPointerArray *outputCachePointers;
@@ -72,5 +79,10 @@
 - (void)receivedDevicedUnauthorizedError:(CSFAction*)action;
 
 - (CSFAction*)actionForSessionTask:(NSURLSessionTask*)task;
+
+/**
+ Provides a mean for test code to check shared instances of CSFNetwork
+ */
++ (instancetype)cachedNetworkForUserAccount:(SFUserAccount*)account;
 
 @end

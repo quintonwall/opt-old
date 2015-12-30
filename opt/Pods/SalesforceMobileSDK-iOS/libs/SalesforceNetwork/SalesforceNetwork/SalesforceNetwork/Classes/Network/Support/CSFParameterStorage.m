@@ -51,16 +51,19 @@
     if (![object isMemberOfClass:self.class])
         return NO;
     
-    if (![object.HTTPMethod isEqualToString:self.HTTPMethod])
+    if (!((self.HTTPMethod == nil && object.HTTPMethod == nil) || [object.HTTPMethod isEqualToString:self.HTTPMethod]))
         return NO;
 
-    if (![self.parameters isEqualToDictionary:object.parameters])
+    if (!((self.parameters == nil && object.parameters == nil) || [self.parameters isEqualToDictionary:object.parameters]))
         return NO;
     
-    if (![self.filenames isEqualToDictionary:object.filenames])
+    if (!((self.filenames == nil && object.filenames == nil) || [self.filenames isEqualToDictionary:object.filenames]))
         return NO;
     
-    if (![self.mimetypes isEqualToDictionary:object.mimetypes])
+    if (!((self.mimetypes == nil && object.mimetypes == nil) || [self.mimetypes isEqualToDictionary:object.mimetypes]))
+        return NO;
+
+    if (!((self.bodyStreamBlock == nil && object.bodyStreamBlock == nil) || [self.bodyStreamBlock isEqual:object.bodyStreamBlock]))
         return NO;
 
     return YES;
@@ -117,27 +120,7 @@
 
     if ([object isKindOfClass:[NSFileWrapper class]]) {
         result = CSFParameterStyleMultipart;
-    }
-
-    else if ([object isKindOfClass:[NSData class]]) {
-        NSData *data = (NSData*)object;
-        if (data.length > CSFParameterMaximumQueryStringDataLength) {
-            result = CSFParameterStyleURLEncoded;
-        } else {
-            result = CSFParameterStyleQueryString;
-        }
-    }
-
-    else if ([object isKindOfClass:[NSString class]]) {
-        NSString *string = (NSString*)object;
-        if (string.length > CSFParameterMaximumQueryStringDataLength) {
-            result = CSFParameterStyleURLEncoded;
-        } else {
-            result = CSFParameterStyleQueryString;
-        }
-    }
-
-    else if (object) {
+    } else if (object) {
         result = CSFParameterStyleQueryString;
     }
 
@@ -176,8 +159,8 @@
     BOOL result = YES;
     NSError *resultError = nil;
 
-    if (self.bodyStream) {
-        request.HTTPBodyStream = self.bodyStream;
+    if (self.bodyStreamBlock) {
+        request.HTTPBodyStream = self.bodyStreamBlock();
     } else {
         // Add explicit query string keys here, only if we are posting multipart or URLEncoded
         // bodies.  If we are doing a querystring request already, then simply wait for the

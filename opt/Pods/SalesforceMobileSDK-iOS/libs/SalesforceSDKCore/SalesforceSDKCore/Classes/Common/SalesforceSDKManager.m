@@ -28,10 +28,10 @@
 #import "SFRootViewManager.h"
 #import "SFSDKWebUtils.h"
 #import "SFManagedPreferences.h"
-#import <SalesforceOAuth/SFOAuthInfo.h>
-#import <SalesforceSecurity/SFPasscodeManager.h>
-#import <SalesforceSecurity/SFPasscodeProviderManager.h>
-#import <SalesforceCommonUtils/SFInactivityTimerCenter.h>
+#import "SFOAuthInfo.h"
+#import "SFPasscodeManager.h"
+#import "SFPasscodeProviderManager.h"
+#import "SFInactivityTimerCenter.h"
 
 // Error constants
 NSString * const kSalesforceSDKManagerErrorDomain     = @"com.salesforce.sdkmanager.error";
@@ -40,20 +40,36 @@ NSString * const kSalesforceSDKManagerErrorDetailsKey = @"SalesforceSDKManagerEr
 // User agent constants
 static NSString * const kSFMobileSDKNativeDesignator = @"Native";
 static NSString * const kSFMobileSDKHybridDesignator = @"Hybrid";
+static NSString * const kSFMobileSDKReactNativeDesignator = @"ReactNative";
 
 // Key for whether or not the user has chosen the app setting to logout of the
 // app when it is re-opened.
 static NSString * const kAppSettingsAccountLogout = @"account_logout_pref";
 
+// Device id
+static NSString* uid = nil;
+
+// Instance class
+static Class InstanceClass = nil;
+
 @implementation SalesforceSDKManager
+
++ (void)setInstanceClass:(Class)className {
+    InstanceClass = className;
+}
 
 + (instancetype)sharedManager
 {
     static dispatch_once_t pred;
     static SalesforceSDKManager *sdkManager = nil;
-    dispatch_once(&pred, ^{
-		sdkManager = [[self alloc] init];
-	});
+    dispatch_once(&pred , ^{
+        uid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+        if (InstanceClass) {
+            sdkManager = [[InstanceClass alloc] init];
+        } else {
+            sdkManager = [[self alloc] init];
+        }
+    });
     return sdkManager;
 }
 
@@ -73,7 +89,17 @@ static NSString * const kAppSettingsAccountLogout = @"account_logout_pref";
         [[NSNotificationCenter defaultCenter] addObserver:self.sdkManagerFlow selector:@selector(handleAuthCompleted:) name:kSFAuthenticationManagerFinishedNotification object:nil];
         
         [SFPasscodeManager sharedManager].preferredPasscodeProvider = kSFPasscodeProviderPBKDF2;
-        self.isNative = NSClassFromString(@"SFHybridViewController") == nil;
+        if (NSClassFromString(@"SFHybridViewController") != nil) {
+            self.appType = kSFAppTypeHybrid;
+        }
+        else {
+            if (NSClassFromString(@"SFNetReactBridge") != nil) {
+                self.appType = kSFAppTypeReactNative;
+            }
+            else {
+                self.appType = kSFAppTypeNative;
+            }            
+        }
         self.useSnapshotView = YES;
         self.authenticateAtLaunch = YES;
         self.userAgentString = [self defaultUserAgentString];
@@ -526,17 +552,25 @@ static NSString * const kAppSettingsAccountLogout = @"account_logout_pref";
 
 - (void)passcodeValidationAtLaunch
 {
-    [SFSecurityLockout setLockScreenSuccessCallbackBlock:^(SFSecurityLockoutAction action) {
-        [self log:SFLogLevelInfo msg:@"Passcode verified, or not configured.  Proceeding with authentication validation."];
-        [self passcodeValidatedToAuthValidation];
-    }];
-    [SFSecurityLockout setLockScreenFailureCallbackBlock:^{
-        // Note: Failed passcode verification automatically logs out users, which the logout
-        // delegate handler will catch and pass on.  We just log the error and reset launch
-        // state here.
-        [self log:SFLogLevelError msg:@"Passcode validation failed.  Logging the user out."];
-    }];
-    [SFSecurityLockout lock];
+    if ([SFUserAccountManager sharedInstance].isCurrentUserAnonymous) {
+
+        // Anonymous user doesn't have any passcode associated with it
+        // so bypass this step and go to the next one directly.
+        [self authValidationAtLaunch];
+    } else {
+        [SFSecurityLockout setLockScreenSuccessCallbackBlock:^(SFSecurityLockoutAction action) {
+            [self log:SFLogLevelInfo msg:@"Passcode verified, or not configured.  Proceeding with authentication validation."];
+            [self passcodeValidatedToAuthValidation];
+        }];
+        [SFSecurityLockout setLockScreenFailureCallbackBlock:^{
+
+            // Note: Failed passcode verification automatically logs out users, which the logout
+            // delegate handler will catch and pass on.  We just log the error and reset launch
+            // state here.
+            [self log:SFLogLevelError msg:@"Passcode validation failed.  Logging the user out."];
+        }];
+        [SFSecurityLockout lock];
+    }
 }
 
 - (void)passcodeValidatedToAuthValidation
@@ -548,7 +582,7 @@ static NSString * const kAppSettingsAccountLogout = @"account_logout_pref";
 
 - (void)authValidationAtLaunch
 {
-    if (![SFUserAccountManager sharedInstance].currentUser.credentials.accessToken && self.authenticateAtLaunch) {
+    if (![SFUserAccountManager sharedInstance].isCurrentUserAnonymous && ![SFUserAccountManager sharedInstance].currentUser.credentials.accessToken && self.authenticateAtLaunch) {
         // Access token check works equally well for any of the members being nil, which are all conditions to
         // (re-)authenticate.
         [self.sdkManagerFlow authAtLaunch];
@@ -610,16 +644,25 @@ static NSString * const kAppSettingsAccountLogout = @"account_logout_pref";
         NSString *appName = [[NSBundle mainBundle] infoDictionary][(NSString*)kCFBundleNameKey];
         NSString *appVersion = [[NSBundle mainBundle] infoDictionary][(NSString*)kCFBundleVersionKey];
         
+        // App type
+        NSString* appTypeStr;
+        switch (self.appType) {
+            case kSFAppTypeNative: appTypeStr = kSFMobileSDKNativeDesignator; break;
+            case kSFAppTypeHybrid: appTypeStr = kSFMobileSDKHybridDesignator; break;
+            case kSFAppTypeReactNative: appTypeStr = kSFMobileSDKReactNativeDesignator; break;
+        }
+        
         NSString *myUserAgent = [NSString stringWithFormat:
-                                 @"SalesforceMobileSDK/%@ %@/%@ (%@) %@/%@ %@%@ %@",
+                                 @"SalesforceMobileSDK/%@ %@/%@ (%@) %@/%@ %@%@ uid_%@ %@",
                                  SALESFORCE_SDK_VERSION,
                                  [curDevice systemName],
                                  [curDevice systemVersion],
                                  [curDevice model],
                                  appName,
                                  appVersion,
-                                 [SalesforceSDKManager sharedManager].isNative ? kSFMobileSDKNativeDesignator : kSFMobileSDKHybridDesignator,
+                                 appTypeStr,
                                  (qualifier != nil ? qualifier : @""),
+                                 uid,
                                  currentUserAgent
                                  ];
         
@@ -664,6 +707,11 @@ static NSString * const kAppSettingsAccountLogout = @"account_logout_pref";
 - (void)authManagerDidLogout:(SFAuthenticationManager *)manager
 {
     [self.sdkManagerFlow handlePostLogout];
+}
+
+- (void)authManager:(SFAuthenticationManager *)manager willLogoutUser:(SFUserAccount *)user
+{
+
 }
 
 #pragma mark - SFUserAccountManagerDelegate

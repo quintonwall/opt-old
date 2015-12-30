@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/forcedotcom/SalesforceMobileSDK-iOS.svg?branch=unstable)](https://travis-ci.org/forcedotcom/SalesforceMobileSDK-iOS)
+
 # Salesforce.com Mobile SDK for iOS
 
 You have arrived at the source repository for the Salesforce Mobile SDK for iOS.  Welcome!  Starting with our 2.0 release, there are now three ways you can choose to work with the Mobile SDK:
@@ -26,34 +28,40 @@ This script pulls the submodule dependencies from GitHub, to finalize setup of t
 
 See [build.md](build.md) for information on generating binary distributions and app templates.
 
-The Salesforce Mobile SDK for iOS requires iOS 6.0 or greater.  The install.sh script checks for this, and aborts if the configured SDK version is incorrect.  Building from the command line has been tested using ant 1.8.  Older versions might work, but we recommend using the latest version of ant.
+The Salesforce Mobile SDK for iOS requires iOS 8.0 or greater.  The install.sh script checks for this, and aborts if the configured SDK version is incorrect.  Building from the command line has been tested using ant 1.8.  Older versions might work, but we recommend using the latest version of ant.
 
 If you have problems building any of the projects, take a look at the online [FAQ](https://github.com/forcedotcom/SalesforceMobileSDK-iOS/wiki/FAQ) for troubleshooting tips.
 
 Introduction
 ==
 
-### What's New in 3.2
+### What's New in 4.0
 
-**SmartSync Library Enhancements**
-- SmartSync now supports incremental sync, which allows the developer to download only data that has been updated on the server, rather than the entire data set.
-- The sync up operation now offers merge modes that let the developer decide whether to overwrite data that has been modified on the server or discard local changes.
-- SmartSync now supports custom targets, which can manage the data interchange in sync operations. Custom targets let you tailor network interactions to the specific demands of the sync operation.
+**Library Upgrades**
+- iOS 9 features are now fully supported, including bitcode.
+- Raised the minimum iOS version required by Mobile SDK to `8.0`.
+- Upgraded the `Cordova` library to `v3.9.2`.
+- Upgraded the `CocoaLumberjack` library to `v2.2.0`.
 
-**SmartStore Library Enhancements**
-- SmartStore now provides the ability to obtain a global (app-level) SmartStore instance. A global SmartStore instance can be populated with user-agnostic data that will not be deleted when users log out.
-
-**Network Library Enhancements**
-- The underlying network library used by the Mobile SDK is now SalesforceNetwork, which replaces SalesforceNetworkSDK and MKNetworkKit.
-
-**Sample App Updates**
-- A new sample app, `NoteSync`, has been added to demonstrate the syncing of content notes using custom targets.
+**Library Enhancements**
+- Mobile SDK libraries have been refactored to support better consumption. Our libraries are listed below.
+	- SalesforceSDKCore
+	- SalesforceNetwork
+	- SalesforceRestAPI
+	- SmartStore
+	- SmartSync
+	- SalesforceHybridSDK
+	- SalesforceReact
+- Cocoa Touch dynamic framework targets have been added to our libraries. Going forward, this will be the recommended way to consume Mobile SDK libraries.
+- Removed the dependency on `SalesforceCommonUtils`. Mobile SDK for iOS is now fully open source.
+- The SalesforceReact library now provides the ability to use React Native. Refer to the React Native chapter in the Mobile SDK Development Guide for details on how to use this feature.
 
 **Other Technical Improvements**
-- It is now possible to obtain an unauthenticated RestClient instance for use with APIs that do not require authentication.
+- Raised the minimum XCode version required by Mobile SDK to `Xcode 7`.
+- Improvements to sample apps.
 - Various bug fixes.
 
-Check http://developer.force.com/mobilesdk for additional articles and tutorials
+Check http://developer.force.com/mobilesdk for additional articles and tutorials.
 
 ### Native Applications
 The Salesforce Mobile SDK provides the essential libraries for quickly building native mobile apps that interact with the Salesforce cloud platform. The OAuth2 library abstracts away the complexity of securely storing the refresh token or fetching a new session ID when it expires. The SDK also provides Objective-C wrappers for the Salesforce REST API, making it easy to retrieve and manipulate data.

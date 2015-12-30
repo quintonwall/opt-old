@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import WatchKit
 
+
 //import OAuthSwift
 
 let RemoteAccessConsumerKey = "3MVG9fMtCkV6eLhdjZ8TO0bd8hGzu5J5yQgUxxSuCecbgoXyi.K29XllYaR_X0S5uGpH_kLhPbR2bMOys1U2D";
@@ -136,7 +137,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //let defaults = NSUserDefaults(suiteName: appGroupID)
         
         
-        SFLogger.setLogLevel(SFLogLevelDebug)
+        SFLogger.setLogLevel(SFLogLevel.Debug)
         
         // TEST
         //SFAuthenticationManager.sharedManager().logout()
@@ -147,15 +148,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SalesforceSDKManager.sharedManager().postLaunchAction = {
             [unowned self] (launchActionList: SFSDKLaunchAction) in
             let launchActionString = SalesforceSDKManager.launchActionsStringRepresentation(launchActionList)
-            self.log(SFLogLevelInfo, msg:"Post-launch: launch actions taken: \(launchActionString)");
+            self.log(SFLogLevel.Info, msg:"Post-launch: launch actions taken: \(launchActionString)");
             //self.setupRootViewController();
         }
         SalesforceSDKManager.sharedManager().launchErrorAction = {
             [unowned self] (error: NSError?, launchActionList: SFSDKLaunchAction) in
             if let actualError = error {
-                self.log(SFLogLevelError, msg:"Error during SDK launch: \(actualError.localizedDescription)")
+                self.log(SFLogLevel.Error, msg:"Error during SDK launch: \(actualError.localizedDescription)")
             } else {
-                self.log(SFLogLevelError, msg:"Unknown error during SDK launch.")
+                self.log(SFLogLevel.Error, msg:"Unknown error during SDK launch.")
             }
           //  self.initializeAppViewState()
            // SalesforceSDKManager.sharedManager().launch()

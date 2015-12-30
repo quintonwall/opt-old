@@ -49,7 +49,7 @@ class ViewController: UIViewController, SFAuthenticationManagerDelegate {
         //need to perform this check at the end of the authmanager lifecycle
         //because SFRootViewManager removes the current view after didAUthenticate gets called :(
        
-        if !SFUserAccountManager.sharedInstance().currentUser.userName.isEmpty {
+        if SFAuthenticationManager.sharedManager().haveValidSession {
             
            
             /* old watchos way of comms

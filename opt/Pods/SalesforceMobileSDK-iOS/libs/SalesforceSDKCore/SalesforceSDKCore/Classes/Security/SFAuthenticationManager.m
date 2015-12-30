@@ -39,15 +39,15 @@
 #import "SFSDKResourceUtils.h"
 #import "SFRootViewManager.h"
 #import "SFUserActivityMonitor.h"
-#import <SalesforceSecurity/SFPasscodeManager.h>
-#import <SalesforceSecurity/SFPasscodeProviderManager.h>
+#import "SFPasscodeManager.h"
+#import "SFPasscodeProviderManager.h"
 #import "SFPushNotificationManager.h"
 
-#import <SalesforceOAuth/SFOAuthCredentials.h>
-#import <SalesforceOAuth/SFOAuthInfo.h>
-#import <SalesforceCommonUtils/NSURL+SFAdditions.h>
-#import <SalesforceCommonUtils/SFInactivityTimerCenter.h>
-#import <SalesforceCommonUtils/SFTestContext.h>
+#import "SFOAuthCredentials.h"
+#import "SFOAuthInfo.h"
+#import "NSURL+SFAdditions.h"
+#import "SFInactivityTimerCenter.h"
+#import "SFTestContext.h"
 
 static SFAuthenticationManager *sharedInstance = nil;
 
@@ -423,14 +423,19 @@ static Class InstanceClass = nil;
 
 - (void)logoutUser:(SFUserAccount *)user
 {
+
     // No-op, if the user is not valid.
     if (user == nil) {
         [self log:SFLogLevelInfo msg:@"logoutUser: user is nil.  No action taken."];
         return;
     }
-    
+
+    // No-op if the user is anonymous.
+    if (user == [SFUserAccountManager sharedInstance].anonymousUser) {
+        [self log:SFLogLevelDebug msg:@"logoutUser: user is anonymous.  No action taken."];
+        return;
+    }
     [self log:SFLogLevelInfo format:@"Logging out user '%@'.", user.userName];
-    
     NSDictionary *userInfo = @{ @"account": user };
     [[NSNotificationCenter defaultCenter] postNotificationName:kSFUserWillLogoutNotification
                                                         object:self
@@ -447,16 +452,15 @@ static Class InstanceClass = nil;
     // If it's not the current user, this is really just about clearing the account data and
     // user-specific state for the given account.
     if (![user isEqual:userAccountManager.currentUser]) {
+        [[SFPushNotificationManager sharedInstance] unregisterSalesforceNotifications:user];
         [userAccountManager deleteAccountForUser:user error:nil];
         [self revokeRefreshToken:user];
-        [[SFPushNotificationManager sharedInstance] unregisterSalesforceNotifications:user];
         return;
     }
     
     // Otherwise, the current user is being logged out.  Supply the user account to the
     // "Will Logout" notification before the credentials are revoked.  This will ensure
     // that databases and other resources keyed off of the userID can be destroyed/cleaned up.
-    
     if ([SFPushNotificationManager sharedInstance].deviceSalesforceId) {
         [[SFPushNotificationManager sharedInstance] unregisterSalesforceNotifications];
     }
@@ -647,15 +651,12 @@ static Class InstanceClass = nil;
     
     // Assign the identity data to the current user
     NSAssert([SFUserAccountManager sharedInstance].currentUser != nil, @"Current user should not be nil at this point.");
-    [SFUserAccountManager sharedInstance].currentUser.idData = self.idCoordinator.idData;
-    
+    [[SFUserAccountManager sharedInstance] applyIdData:self.idCoordinator.idData];
+
     // Save the accounts
     [[SFUserAccountManager sharedInstance] saveAccounts:nil];
 
     // Notify the session is ready
-    [self willChangeValueForKey:@"currentUser"];
-    [self didChangeValueForKey:@"currentUser"];
-    
     [self willChangeValueForKey:@"haveValidSession"];
     [self didChangeValueForKey:@"haveValidSession"];
     
@@ -744,8 +745,8 @@ static Class InstanceClass = nil;
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
         [request setHTTPMethod:@"GET"];
         [request setHTTPShouldHandleCookies:NO];
-        NSURLConnection *urlConnection = [[NSURLConnection alloc] initWithRequest:request delegate:nil];
-        [urlConnection start];
+        NSURLSession* session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]];
+        [[session dataTaskWithRequest:request] resume];
     }
     [user.credentials revoke];
 }
@@ -822,10 +823,8 @@ static Class InstanceClass = nil;
     
     [SFAuthenticationManager removeAllCookies];
     [self.coordinator stopAuthentication];
-    self.coordinator.delegate = nil;
-    self.idCoordinator.delegate = nil;
-    SFRelease(_idCoordinator);
-    SFRelease(_coordinator);
+    self.idCoordinator.idData = nil;
+    self.coordinator.credentials = nil;
 }
 
 - (void)cleanupStatusAlert
