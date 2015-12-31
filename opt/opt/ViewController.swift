@@ -13,19 +13,29 @@ class ViewController: UIViewController, SFAuthenticationManagerDelegate {
     @IBOutlet weak var connectButton: UIButton!
 
     
+    override func viewWillAppear(animated: Bool) {
+       
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        // Do any additional setup after loading the view, typically from a nib.
         SFAuthenticationManager.sharedManager().addDelegate(self)
-
+        
+        if SFAuthenticationManager.sharedManager().haveValidSession {
+            print("VALID")
+            dispatch_async(dispatch_get_main_queue()){
+                
+                self.performSegueWithIdentifier("loggedIn", sender: self)
+                
+            }
+    }
         
         connectButton.backgroundColor = UIColor.clearColor()
         //connectButton.layer.cornerRadius = 5
-       // connectButton.layer.borderWidth = 1
-       connectButton.layer.borderColor = UIColor.whiteColor().CGColor
-    }
+        // connectButton.layer.borderWidth = 1
+        connectButton.layer.borderColor = UIColor.whiteColor().CGColor
+}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -37,11 +47,7 @@ class ViewController: UIViewController, SFAuthenticationManagerDelegate {
      
         SalesforceSDKManager.sharedManager().launch()
         
-        //todo - move this into the authManager call back
-        //but I couldnt get it to work!
-        
     }
-    
     
     
     func authManagerDidFinish(manager: SFAuthenticationManager!, info: SFOAuthInfo!) {
@@ -50,17 +56,6 @@ class ViewController: UIViewController, SFAuthenticationManagerDelegate {
         //because SFRootViewManager removes the current view after didAUthenticate gets called :(
        
         if SFAuthenticationManager.sharedManager().haveValidSession {
-            
-           
-            /* old watchos way of comms
-            print(appGroupID)
-            
-            
-            if let defaults = NSUserDefaults(suiteName: appGroupID) {
-                defaults.setValue(SFUserAccountManager.sharedInstance().currentUser.userName, forKey: "username")
-                defaults.synchronize()
-            }
-            */
             
              self.performSegueWithIdentifier("loggedIn", sender: nil)
         }

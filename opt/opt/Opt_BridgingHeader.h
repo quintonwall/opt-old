@@ -12,20 +12,6 @@
 
 #endif /* Opt_BridgingHeader_h */
 
-/*
-#import "SFLogger.h"
-#import "SFUserAccountManager.h"
-#import "SalesforceSDKManager.h"
-#import "SFAuthenticationManager.h"
-#import "SFPushNotificationManager.h"
-#import "SFDefaultUserManagementViewController.h"
-#import "SalesforceRestAPI/SFRestAPI.h"
-#import "SFRestAPISalesforceAction.h"
-#import "SFRestAPI+Blocks.h"
-#import "SFRestAPI+Files.h"
-#import "SFOAuthInfo.h"
-*/
-
 
 #import <SalesforceSDKCore/SFLogger.h>
 #import <SalesforceSDKCore/SFUserAccountManager.h>
