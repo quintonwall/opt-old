@@ -33,7 +33,7 @@ class OpportunityHelper: NSObject, WCSessionDelegate, SFRestDelegate {
     func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
        print("heard a request")
        //make sure we are logged in
-        if( SFUserAccountManager.sharedInstance().currentUser == nil) {
+        if( !SFAuthenticationManager.sharedManager().haveValidSession) {
              print("not logged in")
              replyHandler(["error": "not logged in"])
         } else {
